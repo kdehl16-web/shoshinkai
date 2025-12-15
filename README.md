@@ -1,191 +1,146 @@
-# Shoshinkai recreation
+# showfloor
+![showfloorlogo](https://github.com/user-attachments/assets/255078c5-d31c-4284-a720-f1f2ddcefd4f)
 
-This repo contains a modified decompilation of Super Mario 64 which aims to recreate the SpaceWorld 1995 build.
+## Introduction
 
-As of June 2022, The Preservation Project has become an open source project, meaning the community can contribute to it to make it a perpetually improving recreation.
-
-Please create any issues you find and feel free to pull request, any contributions are appreciated.
-
-Original assets, to-do lists and more can soon be found in a special repository.
-
-## Credits
-
-### Original "The Preservation Project" Team
-
-#### Programming
-
-*Fluvian*
-
-*Marionova*
-
-#### Textures
-
-*EmmaNerd*
-
-*CDi-Fails*
-
-*Lurondor*
-
-*Robichu*
-
-*Zucchino*
-
-*HoloMario*
-
-#### Models
-
-*B3313*
-
-*CDi-Fails*
-
-*Lurondor*
-
-*Robichu*
-
-*Zucchino*
-
-#### Sound
-
-*EmmaNerd*
-
-#### Research
-
-*Xiartic*
-
-#### Playtesting
-
-*Xiartic*
-
-*lunr*
-
-### Contributors
-
-*The1UPGuy*
-
-*Guestpiki*
-
-*iProgramInCpp*
-
-*Toru the Red Fox*
-
-*CreamDream*
-
-### Original Super Mario 64 Decompilation Team
+**showfloor** is a recreation of the Shoshinkai 1995 demo of Super Mario 64, based on [The Preservation Project](https://github.com/Sunlitspace542/tpp-mirror) (TPP). It aims to continue TPP's legacy with greater accuracy to the source material.
 
 ## Installation
 
-### Docker
+The build process is the same as the [SM64 Decomp's](https://github.com/n64decomp/sm64).
+Follow their [README](https://github.com/n64decomp/sm64/blob/master/README.md#installation) for setup steps and prerequisites (dependencies, baserom, etc).
 
-#### 1. Copy baserom(s) for asset extraction
+Clone and build:
 
-For each version (jp/us/eu) that you want to build a ROM for, put an existing ROM at
-`./baserom.<version>.z64` for asset extraction.
-
-#### 2. Create docker image
-
-```bash
-docker build -t tpp .
+```sh
+git clone https://github.com/96flashbacks/showfloor.git
+cd showfloor
+make
 ```
 
-#### 3. Build
+### RSP Microcode
 
-To build we simply have to mount our local filesystem into the docker container and build.
+This project uses the same `GRUCODE` build variable as the SM64 Decomp, but with different options.
 
-```bash
-# for example if you have baserom.us.z64 in the project root
-docker run --rm -v ${PWD}:/tpp tpp make VERSION=jp -j4
+Default is `f3d_102695`.
 
-# if your host system is linux you need to tell docker what user should own the output files
-docker run --rm -v ${PWD}:/tpp --user $UID:$UID tpp make VERSION=jp -j4
+- `f3d_102695`: gspFast3D from Ultra 64 OS release 102695 (U64 Aging Cartridge). Not HLE-compatible.
+- `f3d_20E`: gspFast3D from OS 2.0E (bbgames' ostrees). HLE-compatible.
+
+Build with a specific microcode:
+
+```sh
+make GRUCODE=f3d_20E
 ```
 
-Resulting artifacts can be found in the `build` directory.
+## Q&A
 
-### Linux
+**Can I use this as a base for another project?**
+- Yes, but not recommended, as many vanilla assets were removed or edited, so you'd need to re-add them.
 
-#### 1. Copy baserom(s) for asset extraction
+**Can I contribute to this repository?**
+- Contributions are welcome. Please open an issue to report problems or suggest improvements, and feel free to submit pull requests.
 
-To build TPP, you must provide a japanese ROM `./baserom.jp.z64` in the root folder for asset extraction.
+For more questions, join our [Discord server](https://discord.gg/ynabeAS4eD).
 
-#### 2. Install build dependencies
+## Credits
 
-The build system has the following package requirements:
- * binutils-mips >= 2.27
- * python3 >= 3.6
- * libaudiofile
- * libcapstone-dev
+### '96flashbacks' Team
 
-__Debian / Ubuntu__
-```
-sudo apt install build-essential pkg-config git binutils-mips-linux-gnu python3 zlib1g-dev libaudiofile-dev libcapstone-dev
-```
+#### Main Programming
+- stalechilibeans
+- 1up Guy
+- elinspectorardilla
 
-Download latest package from [qemu-irix Releases](https://github.com/n64decomp/qemu-irix/releases)
-```
-sudo dpkg -i qemu-irix-2.11.0-2169-g32ab296eef_amd64.deb
-```
+#### Additional Programming
+- ummheather
+- iProgramInCpp
 
-(Optional) Clone https://github.com/n64decomp/qemu-irix and follow the install instructions in the README.
+#### Assets
+- Scraps
+- ummheather
+- 1up Guy
+- stalechilibeans
+- `K-Dubs΄
 
-__Arch Linux__
-```
-sudo pacman -S base-devel python audiofile
-```
-Install the following AUR packages:
-* [mips64-elf-binutils](https://aur.archlinux.org/packages/mips64-elf-binutils) (AUR)
-* [qemu-irix-git](https://aur.archlinux.org/packages/qemu-irix-git) (AUR)
+#### Research & Playtesting
+- Scraps
+- Sleekflash16
+- duskewl/jadu
+- `K-Dubs΄
+  
+### '96flashbacks' Server Contributors
 
-#### 3. Build ROM
+#### Additional Programming
+- Phil564
+- Fluvian
+- diesel64
+- penguinlambz
 
-Run `make` to build the ROM (defaults to `VERSION=jp`). Make sure your path to the repo 
-is not too long or else this process will error, as the emulated IDO compiler cannot 
-handle paths longer than 255 characters.
-Examples:
-```
-make VERSION=jp -j4       # build (J) version instead with 4 jobs
-make VERSION=eu COMPARE=0 # non-matching EU version still WIP
-```
+#### Assets
+- toonjoey
+- Lurondor
+- icehotlemonade
+- Neverax
+- Diamond Hero
+- Holo
+- sonicdude143
 
-## Windows
+#### Music & Audio
+- skibidigurt
+- RetroDev
+- emlimate
+- XKoop7321
 
-For Windows, install WSL and a distro of your choice following
-[Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
-We recommend either Debian or Ubuntu 18.04 Linux distributions under WSL.
+#### Miscellaneous Help
+- pack.san
+- Xiartic
+- WooHale54
+- timmy6259
+- Zucchino
+- xerox
+  
+#### Special Thanks
+- na0micakes
+- Matsilagi
+- lunr
+- CharD
+- Tony (Hard4Games)
+- aaali
 
-Then follow the directions in the [Linux](#linux) installation section above.
+### Original 'The Preservation Project' Team
 
-## macOS
+#### Programming
+- Fluvian
+- Marionova
+  
+#### Assets
+- EmmaNerd
+- CDi-Fails
+- Lurondor
+- Robichu
+- Zucchino
+- Holo
 
-macOS is currently unsupported as qemu-irix is unable to be built for macOS host.
-The recommended path is installing a Linux distribution under a VM.
+#### Research & Playtesting
+- Xiartic
+- lunr
+  
+#### Original 'The Preservation Project' Contributors
+- 1up Guy
+- Guestpiki
+- iProgramInCpp
+- Toru the Red Fox
+- CreamDream
+- Diamond Hero
 
-## Project Structure
-
-```
-sm64
-├── actors: object behaviors, geo layout, and display lists
-├── asm: handwritten assembly code, rom header
-│   └── non_matchings: asm for non-matching sections
-├── assets: animation and demo data
-│   ├── anims: animation data
-│   └── demos: demo data
-├── bin: asm files for ordering display lists and textures
-├── build: output directory
-├── data: behavior scripts, misc. data
-├── doxygen: documentation infrastructure
-├── enhancements: example source modifications
-├── include: header files
-├── levels: level scripts, geo layout, and display lists
-├── lib: SDK library code
-├── sound: sequences, sound samples, and sound banks
-├── src: C source code for game
-│   ├── audio: audio code
-│   ├── buffers: stacks, heaps, and task buffers
-│   ├── engine: script processing engines and utils
-│   ├── game: behaviors and rest of game source
-│   ├── goddard: Mario intro screen
-│   └── menu: title screen and file, act, and debug level selection menus
-├── text: dialog, level names, act names
-├── textures: skybox and generic texture data
-└── tools: build tools
-```
+### Tools & Resources
+- [Fast64](https://github.com/Fast-64/fast64)
+- [SM64 Decomp](https://github.com/n64decomp/sm64)
+- [64History’s Archives](https://archive.org/details/sm64-beta-content)
+- [Dudaw’s Archives](https://archive.org/details/sm64brp_src_abandoned)
+- [Roovahlees’s Archives](https://archive.org/details/@roovahlees)
+- [VGM & Other Instrument Sources Spreadsheet](https://docs.google.com/spreadsheets/d/1JJBlHHDc65fhZmKUGLrDTLCm6rfUU83-kbuD8Y0zU0o/edit?gid=2047725819#gid=2047725819)
+- [Retro Aesthetics’ Mario Series Matches](https://retroaesthetics.net/mario-series-matches/)
+- [TCRF’s Page](https://tcrf.net/Prerelease:Super_Mario_64_(Nintendo_64)/Shoshinkai_1995_Demo)
+- [Original TPP Source Code](https://github.com/Sunlitspace542/tpp-mirror)
