@@ -34,6 +34,8 @@ Original assets, to-do lists and more can soon be found in a special repository.
 
 #### Models
 
+*B3313*
+
 *CDi-Fails*
 
 *Lurondor*
@@ -41,8 +43,6 @@ Original assets, to-do lists and more can soon be found in a special repository.
 *Robichu*
 
 *Zucchino*
-
-*B3313*
 
 #### Sound
 
