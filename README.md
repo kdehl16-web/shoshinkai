@@ -1,4 +1,4 @@
-# The Preservation Project
+# Shoshinkai recreation
 
 This repo contains a modified decompilation of Super Mario 64 which aims to recreate the SpaceWorld 1995 build.
 
@@ -41,6 +41,8 @@ Original assets, to-do lists and more can soon be found in a special repository.
 *Robichu*
 
 *Zucchino*
+
+*B3313*
 
 #### Sound
 
