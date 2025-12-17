@@ -1,6 +1,6 @@
 # Shoshinkai recreation
 
-This repo contains a modified decompilation of Super Mario 64 which aims to recreate the SpaceWorld 1995 build.
+This repo contains a modified decompilation of Super Mario 64 which aims to recreate the Shoshinkai 1995 build.
 
 As of June 2022, The Preservation Project has become an open source project, meaning the community can contribute to it to make it a perpetually improving recreation.
 
