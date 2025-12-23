@@ -8,6 +8,7 @@ Please create any issues you find and feel free to pull request, any contributio
 
 Original assets, to-do lists and more can soon be found in a special repository.
 
+December 22nd, not moved
 ## Credits
 
 ### Original "The Preservation Project" Team
